@@ -9,7 +9,7 @@
 <div class="container">
     {% include "components/errors.html" %}
 
-    <div id="score-graph" class="row d-flex align-items-center">
+    <div id="score-graph" class="row d-flex align-items-center" style="background-color: transparent;">
         <div class="col-md-12 text-center">
             <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
         </div>
@@ -75,11 +75,18 @@
 {% endblock %}
 
 {% block scripts %}
-    <script defer src="{{ url_for('views.themes', path='js/echarts.bundle.js') }}"></script>
+    <!-- <script defer src="{{ url_for('views.themes', path='js/echarts.bundle.js') }}"></script>
+    <script defer src="{{ url_for('views.themes', path='js/pages/scoreboard.js') }}"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script>
         document.querySelectorAll('.filter-button').forEach(button => {
             button.addEventListener('click', function() {
                 const selectedBracket = this.getAttribute('data-bracket');
+
+                // Dispatch a custom event with the selected bracket
+                const event = new CustomEvent('bracketChange', { detail: selectedBracket });
+                window.dispatchEvent(event);
+
                 const rows = document.querySelectorAll('.bracket-row');
                 rows.forEach(row => {
                     if (selectedBracket === 'all' || row.getAttribute('data-bracket') === selectedBracket) {
@@ -91,8 +98,195 @@
             });
         });
     </script>
-{% endblock %}
+   <script>
+    function cumulativeSum(arr) {
+        let result = arr.concat();
+        for (let i = 0; i < arr.length; i++) {
+            result[i] = arr.slice(0, i + 1).reduce(function(p, i) {
+            return p + i;
+            });
+        }
+        return result;
+    }
+    function colorHash(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            hash = hash & hash;
+        }
+        // Range calculation
+        // diff = max - min;
+        // x = ((hash % diff) + diff) % diff;
+        // return x + min;
+        // Calculate HSL values
+        // Range from 0 to 360
+        let h = ((hash % 360) + 360) % 360;
+        // Range from 75 to 100
+        let s = (((hash % 25) + 25) % 25) + 75;
+        // Range from 40 to 60
+        let l = (((hash % 20) + 20) % 20) + 40;
+        return `hsl(${h}, ${s}%, ${l}%)`;
+    }
 
-{% block entrypoint %}
-    <script defer src="{{ url_for('views.themes', path='js/pages/scoreboard.js') }}"></script>
+    let chart = null
+    document.addEventListener("DOMContentLoaded", function() 
+    {
+        const graph = window.$("#score-graph");
+
+        // Ensure echarts is available
+        if (typeof echarts !== 'undefined') 
+        {
+
+            const buildGraphData = () => {
+                return window.CTFd.api.get_scoreboard_detail({ count: 10 }).then(response => {
+
+                    const places = response.data;
+                    const teams = Object.keys(places);
+                    if (teams.length === 0) {
+                        return false;
+                    }
+
+                    const option = {
+                        title: {
+                            left: "center",
+                            text: "Top 10 " + (window.CTFd.config.userMode === "teams" ? "Teams" : "Users"),
+                            textStyle: {
+                                color: '#ffffff'
+                            }
+                        },
+                        tooltip: {
+                            trigger: "axis",
+                            axisPointer: {
+                                type: "cross"
+                            }
+                        },
+                        legend: {
+                            type: "scroll",
+                            orient: "horizontal",
+                            align: "left",
+                            bottom: 35,
+                            textStyle: {
+                                color: '#ffffff'
+                            },
+                            data: []
+                        },
+                        toolbox: {
+                            feature: {
+                                dataZoom: {
+                                    yAxisIndex: "none"
+                                },
+                                saveAsImage: {}
+                            }
+                        },
+                        grid: {
+                            containLabel: true,
+                            left: '5%',
+                            right: '5%',
+                            top: '20%',
+                            bottom: '15%'
+                        },
+                        xAxis: [
+                            {
+                                type: "time",
+                                boundaryGap: false,
+                                axisLine: {
+                                    lineStyle: {
+                                        color: '#ffffff'
+                                    }
+                                },
+                                data: []
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: "value",
+                                axisLine: {
+                                    lineStyle: {
+                                        color: '#ffffff'
+                                    }
+                                }
+                            }
+                        ],
+                        dataZoom: [
+                            {
+                                id: "dataZoomX",
+                                type: "slider",
+                                xAxisIndex: [0],
+                                filterMode: "filter",
+                                height: 20,
+                                top: 35,
+                                fillerColor: "rgba(233, 236, 241, 0.4)",
+                                handleStyle: {
+                                    color: '#ffffff'
+                                }
+                            }
+                        ],
+                        series: []
+                    };
+
+                    for (let i = 0; i < teams.length; i++) {
+                        if (window.activeBracket === 'all' || places[teams[i]].bracket_id === window.activeBracket){
+                            const team_score = [];
+                            const times = [];
+                            for (let j = 0; j < places[teams[i]]["solves"].length; j++) {
+                                team_score.push(places[teams[i]]["solves"][j].value);
+                                const date = window.dayjs(places[teams[i]]["solves"][j].date);
+                                times.push(date.toDate());
+                            }
+                            
+                            const total_scores = cumulativeSum(team_score);
+                            var scores = times.map(function(e, i) { return [e, total_scores[i]] });
+                            
+                            option.legend.data.push(places[teams[i]]["name"]);
+                            
+                            const data = {
+                                name: places[teams[i]]["name"],
+                                type: "line",
+                                label: {
+                                    normal: {
+                                        position: "top"
+                                    }
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        color: colorHash(places[teams[i]]["name"] + places[teams[i]]["id"])
+                                    }
+                                },
+                                data: scores
+                            };
+                            option.series.push(data);
+                        }
+                    }
+                    return option;
+                });
+            };
+
+            const updateGraph = () => {
+                buildGraphData().then(option => {
+                    // console.log("OPTIONS", option)
+                    if (chart) 
+                        chart.dispose();
+                    chart = echarts.init(document.querySelector("#score-graph"));
+                    chart.setOption(option);
+                });
+            };
+
+            window.$(() => {
+                window.activeBracket = 'all';
+                setInterval(updateGraph, 300000); // Update scores every 5 minutes
+                updateGraph();
+                window.addEventListener('bracketChange', function(event) {
+                    window.activeBracket = event.detail === "all" ? "all" : parseInt(event.detail);
+                    updateGraph();
+                });
+            });
+        }
+    });
+</script>
+<style>
+    /* Ensure the canvas has no background color */
+    canvas {
+        background: transparent !important;
+    }
+</style>
 {% endblock %}

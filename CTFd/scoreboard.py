@@ -9,6 +9,7 @@ from CTFd.utils.decorators.visibility import (
 from CTFd.utils.helpers import get_infos
 from CTFd.utils.scores import get_standings
 from CTFd.utils.user import is_admin
+from CTFd.api.v1.brackets import BracketList
 
 scoreboard = Blueprint("scoreboard", __name__)
 
@@ -25,5 +26,8 @@ def listing():
     if is_admin() is True and scores_visible() is False:
         infos.append("Scores are not currently visible to users")
 
+    brackets_list = BracketList().get()
+    brackets_config = brackets_list.get("data", [])
+
     standings = get_standings()
-    return render_template("scoreboard.html", standings=standings, infos=infos)
+    return render_template("scoreboard.html", standings=standings, infos=infos, brackets=brackets_config)
