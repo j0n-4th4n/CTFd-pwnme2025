@@ -17,7 +17,7 @@ from CTFd.cache import (
     clear_user_session,
 )
 from CTFd.constants import RawEnum
-from CTFd.models import Awards, Submissions, Teams, Unlocks, Users, db
+from CTFd.models import Awards, Submissions, Teams, Unlocks, Users, db, Brackets
 from CTFd.schemas.awards import AwardSchema
 from CTFd.schemas.submissions import SubmissionSchema
 from CTFd.schemas.teams import TeamSchema
@@ -162,6 +162,11 @@ class TeamList(Resource):
         if response.errors:
             return {"success": False, "errors": response.errors}, 400
 
+        # Determine the bracket based on the checkbox value
+        is_senior = req.get('is_senior', False)
+        bracket = 'senior' if is_senior else 'junior'
+        response.data.bracket = bracket
+
         db.session.add(response.data)
         db.session.commit()
 
@@ -172,6 +177,7 @@ class TeamList(Resource):
         clear_challenges()
 
         return {"success": True, "data": response.data}
+
 
 
 @teams_namespace.route("/<int:team_id>")
@@ -326,6 +332,18 @@ class TeamPrivate(Resource):
 
         if response.errors:
             return {"success": False, "errors": response.errors}, 400
+
+        # Update the bracket field
+        bracket_name = data.get("bracket")
+        if bracket_name:
+            bracket = Brackets.query.filter_by(name=bracket_name).first()
+            if bracket:
+                team.bracket_id = bracket.id
+            else:
+                return {
+                    "success": False,
+                    "errors": {"bracket": ["Invalid bracket name"]},
+                }, 400
 
         db.session.commit()
         clear_team_session(team_id=team.id)
@@ -667,3 +685,4 @@ class TeamPublicAwards(Resource):
 
         count = len(response.data)
         return {"success": True, "data": response.data, "meta": {"count": count}}
+    

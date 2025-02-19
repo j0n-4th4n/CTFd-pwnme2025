@@ -108,6 +108,8 @@ def TeamRegisterForm(*args, **kwargs):
     class _TeamRegisterForm(BaseForm):
         name = StringField(_l("Team Name"), validators=[InputRequired()])
         password = PasswordField(_l("Team Password"), validators=[InputRequired()])
+        # Add the new checkbox field
+        is_senior = BooleanField(_l("Senior Bracket"), default=False)
         submit = SubmitField(_l("Create"))
 
         @property

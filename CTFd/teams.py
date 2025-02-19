@@ -11,6 +11,7 @@ from CTFd.utils.decorators.visibility import (
     check_account_visibility,
     check_score_visibility,
 )
+from CTFd.api.v1.brackets import BracketList
 from CTFd.utils.helpers import get_errors, get_infos
 from CTFd.utils.humanize.words import pluralize
 from CTFd.utils.user import get_current_user, get_current_user_attrs
@@ -353,6 +354,10 @@ def private():
     place = team.place
     score = team.get_score(admin=True)
 
+    # Fetch brackets from the BracketList endpoint
+    brackets_list = BracketList().get()
+    brackets_config = brackets_list.get("data", [])
+
     if config.is_scoreboard_frozen():
         infos.append("Scoreboard has been frozen")
 
@@ -365,6 +370,7 @@ def private():
         score=score,
         place=place,
         score_frozen=config.is_scoreboard_frozen(),
+        brackets=brackets_config,
         infos=infos,
         errors=errors,
     )

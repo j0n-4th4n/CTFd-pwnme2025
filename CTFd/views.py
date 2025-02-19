@@ -205,22 +205,566 @@ def setup():
                 set_config("ctf_banner", f.location)
 
             # Splice in our banner
-            index = f"""<div class="row">
-    <div class="col-md-6 offset-md-3">
-        <img class="w-100 mx-auto d-block" style="max-width: 500px;padding: 50px;padding-top: 14vh;" src="{default_ctf_banner_location}" />
-        <h3 class="text-center">
-            <p>A cool CTF platform from <a href="https://ctfd.io">ctfd.io</a></p>
-            <p>Follow us on social media:</p>
-            <a href="https://twitter.com/ctfdio"><i class="fab fa-twitter fa-2x" aria-hidden="true"></i></a>&nbsp;
-            <a href="https://facebook.com/ctfdio"><i class="fab fa-facebook fa-2x" aria-hidden="true"></i></a>&nbsp;
-            <a href="https://github.com/ctfd"><i class="fab fa-github fa-2x" aria-hidden="true"></i></a>
-        </h3>
-        <br>
-        <h4 class="text-center">
-            <a href="admin">Click here</a> to login and setup your CTF
-        </h4>
+            index = """
+
+
+<style>
+  /* Overall container with a retro parchment background */
+.retro-container {
+    padding: 20px;
+  	width: 100vw;
+  	margin: auto;
+    font-family: "Courier New", Courier, monospace;
+}
+
+/* Section headings with a purple gradient effect (lighter purple from top to bottom) */
+.section-heading {
+    font-family: "Press Start 2P", cursive;
+    text-align: left;
+    margin-bottom: 15px;
+    font-size: 2.0rem;
+    background: linear-gradient(45deg, #5a4ee7, #6c47d3, #8b74e1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+}
+
+p {
+    font-size: 1.3rem;
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding and borders are included in the width */
+  	text-align: left;
+}
+  
+.inline-container {
+  display: flex;
+  justify-items: center;
+  align-items: center; /* Vertically center-align the items */
+  font-size: 10px;
+}
+  
+.rule-point {
+  display: flex;
+  justify-items: center;
+  align-items: center; /* Vertically center-align the items */
+  font-size: 10px;
+  margin-left: 2rem;
+}
+
+.inline-arrow {
+  width: 27px; /* Adjust the width as needed */
+  height: auto;
+  margin-right: 20px; /* Space between the arrow and the title */
+  margin-bottom: 20px;
+}
+ 
+ .inline-triangle {
+  width: 17px; /* Adjust the width as needed */
+  height: auto;
+  margin-right: 20px; /* Space between the arrow and the title */
+  margin-bottom: 20px;
+}
+  
+/* Section content styling */
+.section-content {
+    width: 100%;
+    text-align: center;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+h4, h3 {
+    width: 100%;
+    position: relative;
+    display: block; /* Change to block to allow full-width expansion */
+    text-align: left;
+    opacity: 1;
+}
+
+  h4:hover, h3:hover {
+    text-shadow: 1px -1px #6a1b9a, -1px 1px #ab47bc;
+  }
+
+  h4::before, h3::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #e0ffff;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: difference;
+    transition: 0.1s ease-in-out;
+    text-align: left;
+  }
+
+  h4:hover::before, h3:hover::before {
+    animation: glitch 360ms ease-in-out infinite;
+  }
+
+  /* Further adjusted keyframes for an even softer glitch effect */
+  @keyframes glitch {
+    0% {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 1;
+    }
+    20% {
+      top: -0.5px;
+      left: 49.5%;
+    }
+    40% {
+      top: 0.5px;
+      left: 50.5%;
+    }
+    60% {
+      top: -0.25px;
+      left: 50.25%;
+    }
+    80% {
+      top: 0.25px;
+      left: 49.75%;
+    }
+    100% {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 1;
+    }
+  }
+
+  /* Glitch effect class */
+  .glitch-active {
+    text-shadow: 2px -2px #6a1b9a, -2px 2px #ab47bc;
+  }
+
+  .glitch-active::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #e0ffff;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: difference;
+    animation: glitch 360ms ease-in-out infinite;
+  }
+  input[type="text"],
+  input[type="submit"] {
+      align-items: center; /* Remove default margin */
+  }
+</style>
+
+<style>
+/* SPONSOR */
+/* Container for the gold sponsor */
+.gold-sponsor-container {
+    border: 3px solid gold;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    animation: glowBorder 2s infinite;
+}
+
+/* Keyframes for the glowing border animation */
+@keyframes glowBorder {
+    0%, 100% {
+        border-color: gold;
+        box-shadow: 0 0 10px gold;
+    }
+    50% {
+        border-color: #FFD700;
+        box-shadow: 0 0 20px #FFD700;
+    }
+}
+
+/* Ensure the image and text are centered */
+.gold-sponsor-container img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.gold-sponsor-container h5,
+.gold-sponsor-container p {
+    text-align: center;
+    color: gold;
+}
+
+.silver-sponsors-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px; /* Optional: Adds space between the items */
+}
+
+.golden-gradient-text {
+    font-size: 2rem;
+    background: linear-gradient(45deg, #FFD700, #FFA500, #FF8C00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+.silver-sponsors-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start; /* Align items at the top */
+    gap: 20px; /* Optional: Adds space between the items */
+}
+
+.sponsor-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+    max-width: 50%;
+}
+
+.silver-gradient-text {
+    font-size: 2rem;
+    background: linear-gradient(45deg, #C0C0C0, #A9A9A9, #808080);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.bronze-gradient-text {
+    font-size: 2rem;
+    background: linear-gradient(45deg, #CD7F32, #C47E46, #B5651D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+
+</style>
+
+<script>-
+  function triggerRandomGlitch() {
+    // Select all h3 and h4 elements
+    const headings = document.querySelectorAll("h3.section-heading, h4.section-heading");
+
+    if (headings.length === 0) return; // Exit if no headings found
+
+    // Pick a random heading
+    const randomHeading = headings[Math.floor(Math.random() * headings.length)];
+
+    // Add glitch effect class
+    randomHeading.classList.add("glitch-active");
+
+    // Remove effect after 2 seconds
+    setTimeout(() => {
+      randomHeading.classList.remove("glitch-active");
+    }, 2000);
+  }
+
+  // Run the glitch effect every 5 seconds (adjust as needed)
+  setInterval(triggerRandomGlitch, 5000);
+</script>
+
+  
+  <div class="container retro-container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 text-center">
+        <img
+          class="w-100 mx-auto d-block"
+          style="max-width: 500px; padding: 50px; padding-top: 14vh"
+          src="/themes/pwnme2025/static/img/pwnme2025.png"
+          alt="PWNME CTF Logo"
+        />
+      </div>
     </div>
-</div>"""
+    <div class="row">
+      <div class="section-content glitch">
+        <p style="text-align: center;">
+          Participez à notre challenge de cybersécurité et testez vos compétences
+          dans un environnement rétro et ludique.
+        </p>
+      </div>
+    </div>
+    <div style="height: 20vh;"></div>
+    <div class="row">
+      <div class="section-content glitch">
+        <div class="inline-container">
+          <img class="inline-arrow" src="/themes/pwnme2025/static/img/arrowright.svg" alt="arrow" />
+          <h4 data-text="Quals schedule" class="section-heading quals-heading">Quals schedule</h4>
+        </div>
+        <div>
+        	<p><strong>Qualification start:</strong> Fri 28th of February 2025</p>
+        	<p><strong>Qualification end:</strong> Sun 2nd of Mars 2025</p>
+        </div>
+      </div>
+    </div>
+    <div style="height: 6rem;"></div>
+    <div class="row">
+      <div class="section-content glitch">
+        <div class="inline-container">
+          <img class="inline-arrow" src="/themes/pwnme2025/static/img/arrowright.svg" alt="arrow" />
+          <h4  data-text="Finals schedule" class="section-heading quals-heading">Finals schedule</h4>
+        </div>
+      	<p><strong>Final:</strong> Sat 12th of April 2025</p>
+      </div>
+    </div>
+    <div style="height: 6rem;"></div>
+    <div class="row">
+      <div class="section-content glitch">
+      	<div class="inline-container">
+          <img class="inline-arrow" src="/themes/pwnme2025/static/img/arrowright.svg" alt="arrow" />
+        	<h4 data-text="Final location" class="section-heading location-heading">Final location</h4>
+        </div>
+        <p>
+          12 bis Quai François Truffaut, 78180 Montigny-le-Bretonneux, France
+        </p>
+      </div>
+    </div>
+    <div style="height: 6rem;"></div>
+    <div class="row">
+      <div class="section-content glitch">
+      	<div class="inline-container">
+        	<img class="inline-arrow" src="/themes/pwnme2025/static/img/arrowright.svg" alt="arrow" />
+        	<h4 data-text="Contact" class="section-heading contact-heading">Contact</h4>
+        </div>
+        <p>
+          Email : <a href="mailto:contact@ctfxyz.com">contact@ctfxyz.com</a>
+        </p>
+      </div>
+    </div>
+    <div style="height: 6rem;"></div>
+    <div class="row">
+    <div class="section-content glitch">
+        <div class="inline-container">
+            <img class="inline-arrow" src="/themes/pwnme2025/static/img/arrowright.svg" alt="arrow" />
+            <h4 data-text="Rules" class="section-heading contact-heading">Rules</h4>
+        </div>
+        <div>
+            <div class="rule-point">
+                <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+                <p class="text-left">
+                    Pets are welcome, but they can't solve challenges for you.
+                </p>
+            </div>
+            <div class="rule-point">
+                <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+                <p class="text-left">
+                    Wifi password is not "password123." Please stop asking.
+                </p>
+            </div>
+            <div class="rule-point">
+                <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+                <p class="text-left">
+                    No cheating allowed
+                </p>
+            </div>
+            <div class="rule-point">
+                <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+                <p class="text-left">
+                    Make sure to follow the rules
+                </p>
+            </div>
+            <div class="rule-point">
+                <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+                <p class="text-left">
+                    Every participant must be fair
+                </p>
+            </div>
+            <div class="rule-point">
+                <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+                <p class="text-left">
+                    {f you found the flag, you can submit here
+                </p>
+              <div class="rule-point" style="margin-bottom: 16px;">
+                <input type="text" placeholder="Enter flag" />
+                <input type="submit" value="Submit" />
+              </div>
+              <div style="width: 20rem;" ></div>
+            </div>
+            <div class="rule-point">
+                <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+                <p class="text-left">
+                    Flags needs to be found
+                </p>
+            </div>
+            <div class="rule-point">
+                <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+                <p class="text-left">
+                    Losing is not allowed
+                </p>
+            </div>
+            <div class="rule-point">
+                <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+                <p class="text-left">
+                    Always respect other players
+                </p>
+            </div>
+            <div class="rule-point">
+                <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+                <p class="text-left">
+                    Good luck to all participants
+                </p>
+            </div>
+            <div class="rule-point">
+                <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+                <p class="text-left">
+                    }f you have any problems, please contact rayanlecat
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div style="height: 6rem;"></div>
+    <div class="row">
+      <div class="section-content glitch">
+      	<div class="inline-container">
+            <img class="inline-arrow" src="/themes/pwnme2025/static/img/arrowright.svg" alt="arrow" />
+            <h4 data-text="Prizes" class="section-heading prizes-heading">Prizes</h4>
+        </div>
+        <div>
+          <div class="rule-point">
+              <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+              <h5 class="section-heading" style="font-size: 1.4rem;">Academic Bracket</h5>
+          </div>
+          <ul class="text-left" style="margin-left: 2rem;">
+            <li><strong>Top 3 Academic:</strong> Accommodation paid for the CTF finals</li>
+            <li><strong>Top 8 Academic:</strong> Invited to PwnMe CTF finals</li>
+          </ul>
+        </div>
+        <div style="height: 3rem;"></div>
+        <div>
+          <div class="rule-point">
+              <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+              <h5 class="section-heading"  style="font-size: 1.4rem;">Professional Bracket</h5>
+          </div>
+          <ul class="text-left" style="margin-left: 2rem;">
+            <li><strong>Top 3 Professional:</strong> Accommodation paid for the CTF finals</li>
+            <li><strong>Top 8 Professional:</strong> Invited to PwnMe CTF finals</li>
+          </ul>
+        </div>
+        <div style="height: 3rem;"></div>
+        <div>
+          <div class="rule-point">
+              <img class="inline-triangle" src="/themes/pwnme2025/static/img/triangleright.svg" alt="triangle" />
+              <h5 class="section-heading"  style="font-size: 1.4rem;">Additional Prizes</h5>
+          </div>
+          <ul class="text-left" style="margin-left: 2rem;">
+            <li>Hack The Box Silver Annual x8</li>
+            <li>Hack The Box VIP+ x8</li>
+            <li>Hack The Box Store £100 x8</li>
+            <li>Course and Cert Exam Bundle (OSCP or OSEP) x1</li>
+            <li>HydraBus v1 Rev1.5 x4</li>
+            <li>50€ on Lab401 x7</li>
+            <li>50$ Hack5 x4</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div style="height: 6rem;"></div>
+    <div class="row">
+      <div class="section-content glitch">
+        <div class="inline-container">
+            <img class="inline-arrow" src="/themes/pwnme2025/static/img/arrowright.svg" alt="arrow" />
+            <h4 data-text="Sponsors" class="section-heading sponsors-heading">Sponsors</h4>
+        </div>
+        <div>
+          	<img
+                class="w-100 mx-auto d-block gold-sponsor-container"
+          		style="max-width: 500px; padding: 50px;"
+            	src="/themes/pwnme2025/static/img/GreenITSolutions.png" 
+                alt="greenITSolution" 
+            />
+          	<div style="height: 3rem;"></div>
+            <h5 class="section-heading text-center" style="font-size: 2rem;background: linear-gradient(45deg, #FFD700, #FFA500, #FF8C00);">Gold </h5>
+          	<p class="text-center" style="font-size: 1.3rem;">Green IT Solutions, founded in 2011, specializes in providing sustainable and efficient IT services for SMEs. Our mission is to deliver robust, scalable IT solutions that prioritize environmental sustainability and operational efficiency. We focus on Haute Couture Numérique®, open-source solutions, and collaborative approaches to minimize the environmental impact of digital operations. Key achievements include deploying innovative cloud containers and achieving autonomous system status. We are committed to continuous innovation and reducing the carbon footprint of IT infrastructure, supporting our clients' growth while promoting a greener digital future.</p>
+        </div>
+        <div style="height: 10rem;"></div>
+        <div class="silver-sponsors-container">
+            <div class="sponsor-item">
+                <img
+                    class="w-100 mx-auto d-block"
+                    style="max-width: 250px; padding: 25px;"
+                    src="/themes/pwnme2025/static/img/fuzzinglabs.png"
+                    alt="Fuzzinglabs"
+                />
+                <h5 class="section-heading text-center silver-gradient-text">Silver</h5>
+                <p class="text-center" style="font-size: 1rem;">
+Founded in 2021 and headquartered in Paris, FuzzingLabs is a cybersecurity startup specializing in vulnerability research, fuzzing, and blockchain security. We combine cutting-edge research with hands-on expertise to secure some of the most critical components in the blockchain ecosystem.</p>
+            </div>
+            <div class="sponsor-item">
+                <img
+                    class="w-100 mx-auto d-block"
+                    style="max-width: 250px; padding: 25px;"
+                    src="/themes/pwnme2025/static/img/epios.svg"
+                    alt="Epios"
+                />
+              	<div style="height: 2.2rem;"></div>
+                <h5 class="section-heading text-center silver-gradient-text">Silver</h5>
+                <p class="text-center" style="font-size: 1rem;">
+Founded by a cybersecurity and OSINT specialist with more than 10 years of experience, Epieos provides training, investigation and software services to organisations and individuals. We facilitate their efforts to collect and analyse open source information.</p>
+            </div>
+        </div>
+        <div style="height: 10rem;"></div>
+        <div class="silver-sponsors-container">
+            <div class="sponsor-item">
+                <img
+                    class="w-100 mx-auto d-block"
+                    style="max-width: 250px; padding: 25px;"
+                    src="/themes/pwnme2025/static/img/quarkslab.png"
+                    alt="Quarkslab"
+                />
+                <h5 class="section-heading text-center bronze-gradient-text">Bronze</h5>
+                <p class="text-center" style="font-size: 1rem;">
+Quarkslab is a company made up of teams of cybersecurity engineers and developers. Founded 10 years ago, our aim is to force attackers, not defenders, to constantly adapt.
+Through QLab's R&D work and our QFlow and QShield software, Quarkslab develops and shares its security knowledge with the aim of making it accessible to all.</p>
+            </div>
+            <div class="sponsor-item">
+                <img
+                    class="w-100 mx-auto d-block"
+                    style="max-width: 250px; padding: 25px;"
+                    src="/themes/pwnme2025/static/img/Epsilonsec.svg"
+                    alt="Epsilonsec"
+                />
+              	<div style="height: 2.2rem;"></div>
+                <h5 class="section-heading text-center bronze-gradient-text">Bronze</h5>
+                <p class="text-center" style="font-size: 1rem;">
+Epsilon is a young security research company lead by French researchers.
+We started our activity on the 9th of September 2024.
+We do research on mobile platforms (iOS and Android). 
+We also deliver private trainings and work on bespoke R&D projects.
+We're hiring talented researchers who want to evolve in a friendly and benevolent environment.</p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div style="height: 6rem;"></div>
+    <div class="row">
+      <div class="col-md-6 offset-md-3 section-content glitch">
+        <h4 data-text="Suivez-nous" class="section-heading">Suivez-nous</h4>
+        <div class="social-icons text-center">
+          <a href="https://twitter.com/ctfxyz"
+            ><i class="fab fa-twitter fa-2x"></i></a
+          ><a href="https://facebook.com/ctfxyz"
+            ><i class="fab fa-facebook fa-2x"></i></a
+          ><a href="https://github.com/ctfxyz"
+            ><i class="fab fa-github fa-2x"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+"""
             page.content = index
 
             # Visibility
