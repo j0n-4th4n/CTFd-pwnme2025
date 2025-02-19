@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <h1>Create Team</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            {% include "components/errors.html" %}
+
+            {% with form = Forms.teams.TeamRegisterForm() %}
+            {% from "macros/forms.html" import render_extra_fields %}
+            <form method="POST">
+                <div class="form-group">
+                    <b>{{ form.name.label }}</b>
+                    {{ form.name(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    <b>{{ form.password.label }}</b>
+                    {{ form.password(class="form-control") }}
+                </div>
+
+                {{ render_extra_fields(form.extra) }}
+
+                <!-- Add the new checkbox field -->
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="is_senior" id="is_senior">
+                        <label class="form-check-label" for="is_senior">
+                            Senior Bracket
+                        </label>
+                    </div>
+                    <small class="form-text text-muted">
+                        Check this box if you are in the senior bracket.
+                    </small>
+                </div>
+
+                <div class="row pt-3">
+                    <div class="col-md-12">
+                        <p>After creating your team, share the team name and password with your teammates so they can join your team.</p>
+                        {{ form.submit(class="btn btn-success float-right") }}
+                    </div>
+                </div>
+                {{ form.nonce() }}
+            </form>
+            {% endwith %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
