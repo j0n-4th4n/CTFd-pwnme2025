@@ -208,6 +208,7 @@ def setup():
             index = """
 
 
+
 <style>
   /* Overall container with a retro parchment background */
 .retro-container {
@@ -506,7 +507,7 @@ h4, h3 {
         </div>
       </div>
     </div>
-    <div style="height: 6rem;"></div>
+    <div style="height: 4em;"></div>
     <div class="row">
       <div class="section-content glitch">
         <div class="inline-container">
@@ -516,7 +517,7 @@ h4, h3 {
       	<p><strong>Final:</strong> Sat 12th of April 2025</p>
       </div>
     </div>
-    <div style="height: 6rem;"></div>
+    <div style="height: 4em;"></div>
     <div class="row">
       <div class="section-content glitch">
       	<div class="inline-container">
@@ -528,7 +529,7 @@ h4, h3 {
         </p>
       </div>
     </div>
-    <div style="height: 6rem;"></div>
+    <div style="height: 4em;"></div>
     <div class="row">
       <div class="section-content glitch">
       	<div class="inline-container">
@@ -540,7 +541,7 @@ h4, h3 {
         </p>
       </div>
     </div>
-    <div style="height: 6rem;"></div>
+    <div style="height: 4em;"></div>
     <div class="row">
     <div class="section-content glitch">
         <div class="inline-container">
@@ -622,7 +623,7 @@ h4, h3 {
         </div>
     </div>
     </div>
-    <div style="height: 6rem;"></div>
+    <div style="height: 4em;"></div>
     <div class="row">
       <div class="section-content glitch">
       	<div class="inline-container">
@@ -675,41 +676,44 @@ h4, h3 {
             <img class="inline-arrow" src="/themes/pwnme2025/static/img/arrowright.svg" alt="arrow" />
             <h4 data-text="Sponsors" class="section-heading sponsors-heading">Sponsors</h4>
         </div>
-        <div>
+        <div style="height: 4rem;"></div>
+        <div class="container">
           	<img
                 class="w-100 mx-auto d-block gold-sponsor-container"
-          		style="max-width: 500px; padding: 50px;"
+          		style="max-width: 400px; padding: 50px;"
             	src="/themes/pwnme2025/static/img/GreenITSolutions.png" 
                 alt="greenITSolution" 
             />
           	<div style="height: 3rem;"></div>
-            <h5 class="section-heading text-center" style="font-size: 2rem;background: linear-gradient(45deg, #FFD700, #FFA500, #FF8C00);">Gold </h5>
-          	<p class="text-center" style="font-size: 1.3rem;">Green IT Solutions, founded in 2011, specializes in providing sustainable and efficient IT services for SMEs. Our mission is to deliver robust, scalable IT solutions that prioritize environmental sustainability and operational efficiency. We focus on Haute Couture Numérique®, open-source solutions, and collaborative approaches to minimize the environmental impact of digital operations. Key achievements include deploying innovative cloud containers and achieving autonomous system status. We are committed to continuous innovation and reducing the carbon footprint of IT infrastructure, supporting our clients' growth while promoting a greener digital future.</p>
+            <h5 class="section-heading text-center golden-gradient-text" style="font-size: 2rem">Gold </h5>
+          	<p class="text-center" style="font-size: 1.3rem;">Green IT Solutions supports SMEs and large corporations in the management and evolution of their digital infrastructures, focusing on open-source, scalable and eco-responsible solutions, while guaranteeing security and performance.
+The company offers services to ensure the availability, updating and evolution of its customers' IT infrastructures. It implements Disaster Recovery Plans (DRPs) to guarantee data backup and recovery in the event of an incident.
+With its Haute Couture Numérique® concept, Green IT Solutions values personalized support for its customers, by integrating an expert team involved in auditing, engineering, deployment and support of digital infrastructures.</p>
         </div>
         <div style="height: 10rem;"></div>
         <div class="silver-sponsors-container">
             <div class="sponsor-item">
                 <img
                     class="w-100 mx-auto d-block"
-                    style="max-width: 250px; padding: 25px;"
+                    style="max-width: 250px; padding: 25px; margin-bottom: 1.6rem;"
                     src="/themes/pwnme2025/static/img/fuzzinglabs.png"
                     alt="Fuzzinglabs"
                 />
                 <h5 class="section-heading text-center silver-gradient-text">Silver</h5>
-                <p class="text-center" style="font-size: 1rem;">
-Founded in 2021 and headquartered in Paris, FuzzingLabs is a cybersecurity startup specializing in vulnerability research, fuzzing, and blockchain security. We combine cutting-edge research with hands-on expertise to secure some of the most critical components in the blockchain ecosystem.</p>
+                <p class="text-center" style="font-size: 1rem;">Fuzzinglabs is a French startup specializing in vulnerability scanning, fuzzing and web3 security. We carry out application security audits and offer a wide range of technical training courses, while developing open-source tools and our own security products.</p>
             </div>
             <div class="sponsor-item">
                 <img
                     class="w-100 mx-auto d-block"
                     style="max-width: 250px; padding: 25px;"
-                    src="/themes/pwnme2025/static/img/epios.svg"
+                    src="/themes/pwnme2025/static/img/epios.png"
                     alt="Epios"
                 />
               	<div style="height: 2.2rem;"></div>
                 <h5 class="section-heading text-center silver-gradient-text">Silver</h5>
-                <p class="text-center" style="font-size: 1rem;">
-Founded by a cybersecurity and OSINT specialist with more than 10 years of experience, Epieos provides training, investigation and software services to organisations and individuals. We facilitate their efforts to collect and analyse open source information.</p>
+                <p class="text-center" style="font-size: 1rem;">Epieos.com, a French company founded in 2020, designs advanced OSINT tools for law enforcement governments and investigative professionals.
+Its technologies have been used to solve international investigations in counter-terrorism, counter-espionage, child pornography, disinformation and cybercrime.
+The company is recruiting reverse engineering experts (internships, work-study, permanent contracts, freelance) to analyze native libraries, custom protocols, signatures and Crypto WhiteBox, in order to identify tomorrow's OSINT 0days of tomorrow.</p>
             </div>
         </div>
         <div style="height: 10rem;"></div>
@@ -717,30 +721,34 @@ Founded by a cybersecurity and OSINT specialist with more than 10 years of exper
             <div class="sponsor-item">
                 <img
                     class="w-100 mx-auto d-block"
-                    style="max-width: 250px; padding: 25px;"
+                    style="max-width: 250px; padding: 25px; margin-bottom: 2.8rem;"
                     src="/themes/pwnme2025/static/img/quarkslab.png"
                     alt="Quarkslab"
                 />
                 <h5 class="section-heading text-center bronze-gradient-text">Bronze</h5>
-                <p class="text-center" style="font-size: 1rem;">
-Quarkslab is a company made up of teams of cybersecurity engineers and developers. Founded 10 years ago, our aim is to force attackers, not defenders, to constantly adapt.
-Through QLab's R&D work and our QFlow and QShield software, Quarkslab develops and shares its security knowledge with the aim of making it accessible to all.</p>
+                <p class="text-center" style="font-size: 1rem;">Quarkslab is a company composed of teams of engineers and
+developers in cybersecurity. Since 2012, our goal has been to force
+attackers, not defenders, to constantly adapt.
+Through QLab's R&D work and via our QShield solution,
+Quarkslab develops and shares its security knowledge with the
+desire to make it accessible to all.
+We believe that security is everyone's business and that
+there is no freedom without security.
+Our expertise, which combines offensive and defensive
+security in the protection of applications and data, helps companies and government organizations adopt a new security posture!</p>
             </div>
             <div class="sponsor-item">
                 <img
                     class="w-100 mx-auto d-block"
                     style="max-width: 250px; padding: 25px;"
-                    src="/themes/pwnme2025/static/img/Epsilonsec.svg"
+                    src="/themes/pwnme2025/static/img/epsilon.svg"
                     alt="Epsilonsec"
                 />
               	<div style="height: 2.2rem;"></div>
                 <h5 class="section-heading text-center bronze-gradient-text">Bronze</h5>
-                <p class="text-center" style="font-size: 1rem;">
-Epsilon is a young security research company lead by French researchers.
-We started our activity on the 9th of September 2024.
-We do research on mobile platforms (iOS and Android). 
-We also deliver private trainings and work on bespoke R&D projects.
-We're hiring talented researchers who want to evolve in a friendly and benevolent environment.</p>
+                <p class="text-center" style="font-size: 1rem;">Epsilon is a European IT security research company operating in an international environment. 
+We specialize in mobile research (iOS / Android), training and low-level R&D.
+Epsilon has offices in France, Canada and Spain.</p>
             </div>
         </div>
       </div>
@@ -748,19 +756,18 @@ We're hiring talented researchers who want to evolve in a friendly and benevolen
     <div style="height: 6rem;"></div>
     <div class="row">
       <div class="col-md-6 offset-md-3 section-content glitch">
-        <h4 data-text="Suivez-nous" class="section-heading">Suivez-nous</h4>
-        <div class="social-icons text-center">
-          <a href="https://twitter.com/ctfxyz"
-            ><i class="fab fa-twitter fa-2x"></i></a
-          ><a href="https://facebook.com/ctfxyz"
-            ><i class="fab fa-facebook fa-2x"></i></a
-          ><a href="https://github.com/ctfxyz"
-            ><i class="fab fa-github fa-2x"></i
-          ></a>
+        <h4 data-text="Follow us" class="section-heading text-center">Follow us</h4>
+        <div class="text-center" style="display: flex; justify-content: center">
+          <a href="https://x.com/phreaks2600"><i class="fab fa-twitter fa-2x"></i></a>
+          <div style="width: 2rem;"></div>
+          <a href="https://www.linkedin.com/company/phreaks2600"><i class="fab fa-linkedin fa-2x"></i></a>
+          <div style="width: 2rem;"></div>
+          <a href="https://github.com/ctfxyz"><i class="fab fa-github fa-2x"></i></a>
         </div>
       </div>
     </div>
   </div>
+
 
 
 
