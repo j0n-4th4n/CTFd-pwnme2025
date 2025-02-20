@@ -59,5 +59,13 @@
 	{{ Plugins.scripts }}
 
 	{{ Configs.theme_footer }}
+
+	<style>
+		/* Ensure the canvas has no background color */
+		canvas, #score-graph>div>canvas, .challenge-charts  {
+			background: transparent !important;
+			color: "#ffffff" !important;
+		}
+	</style>
 </body>
 </html>
