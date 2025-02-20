@@ -210,18 +210,18 @@ def setup():
 
 
 <style>
-  /* Overall container with a retro parchment background */
+/* Overall container with a retro parchment background */
 .retro-container {
     padding: 20px;
-  	width: 100vw;
-  	margin: auto;
+    width: 100%;
+    margin: auto;
     font-family: "Courier New", Courier, monospace;
+    box-sizing: border-box;
 }
 
 /* Section headings with a purple gradient effect (lighter purple from top to bottom) */
 .section-heading {
     font-family: "Press Start 2P", cursive;
-    text-align: left;
     margin-bottom: 15px;
     font-size: 2.0rem;
     background: linear-gradient(45deg, #5a4ee7, #6c47d3, #8b74e1);
@@ -229,48 +229,47 @@ def setup():
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+    text-align: left; /* Default to left alignment for desktop */
 }
 
 p {
     font-size: 1.3rem;
     width: 100%;
     box-sizing: border-box; /* Ensure padding and borders are included in the width */
-  	text-align: left;
+    text-align: left; /* Align text to the left */
 }
-  
+
 .inline-container {
-  display: flex;
-  justify-items: center;
-  align-items: center; /* Vertically center-align the items */
-  font-size: 10px;
+    display: flex;
+    align-items: center; /* Vertically center-align the items */
+    font-size: 10px;
 }
-  
+
 .rule-point {
-  display: flex;
-  justify-items: center;
-  align-items: center; /* Vertically center-align the items */
-  font-size: 10px;
-  margin-left: 2rem;
+    display: flex;
+    align-items: center; /* Vertically center-align the items */
+    font-size: 10px;
+    margin-left: 2rem;
 }
 
 .inline-arrow {
-  width: 27px; /* Adjust the width as needed */
-  height: auto;
-  margin-right: 20px; /* Space between the arrow and the title */
-  margin-bottom: 20px;
+    width: 27px; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 1rem; /* Space between the arrow and the title */
+  	margin-bottom: 1rem;
 }
- 
- .inline-triangle {
-  width: 17px; /* Adjust the width as needed */
-  height: auto;
-  margin-right: 20px; /* Space between the arrow and the title */
-  margin-bottom: 20px;
+
+.inline-triangle {
+    width: 17px; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 20px; /* Space between the arrow and the title */
+    margin-bottom: 20px;
 }
-  
+
 /* Section content styling */
 .section-content {
     width: 100%;
-    text-align: center;
+    text-align: left; /* Align text to the left */
     padding: 10px 20px;
     margin-bottom: 20px;
     position: relative;
@@ -280,15 +279,15 @@ h4, h3 {
     width: 100%;
     position: relative;
     display: block; /* Change to block to allow full-width expansion */
-    text-align: left;
+    text-align: left; /* Default to left alignment for desktop */
     opacity: 1;
 }
 
-  h4:hover, h3:hover {
+h4:hover, h3:hover {
     text-shadow: 1px -1px #6a1b9a, -1px 1px #ab47bc;
-  }
+}
 
-  h4::before, h3::before {
+h4::before, h3::before {
     content: attr(data-text);
     position: absolute;
     top: 0;
@@ -299,51 +298,51 @@ h4, h3 {
     height: 100%;
     mix-blend-mode: difference;
     transition: 0.1s ease-in-out;
-    text-align: left;
-  }
+    text-align: left; /* Default to left alignment for desktop */
+}
 
-  h4:hover::before, h3:hover::before {
+h4:hover::before, h3:hover::before {
     animation: glitch 360ms ease-in-out infinite;
-  }
+}
 
-  /* Further adjusted keyframes for an even softer glitch effect */
-  @keyframes glitch {
+/* Further adjusted keyframes for an even softer glitch effect */
+@keyframes glitch {
     0% {
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 1;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 1;
     }
     20% {
-      top: -0.5px;
-      left: 49.5%;
+        top: -0.5px;
+        left: 49.5%;
     }
     40% {
-      top: 0.5px;
-      left: 50.5%;
+        top: 0.5px;
+        left: 50.5%;
     }
     60% {
-      top: -0.25px;
-      left: 50.25%;
+        top: -0.25px;
+        left: 50.25%;
     }
     80% {
-      top: 0.25px;
-      left: 49.75%;
+        top: 0.25px;
+        left: 49.75%;
     }
     100% {
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 1;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 1;
     }
-  }
+}
 
-  /* Glitch effect class */
-  .glitch-active {
+/* Glitch effect class */
+.glitch-active {
     text-shadow: 2px -2px #6a1b9a, -2px 2px #ab47bc;
-  }
+}
 
-  .glitch-active::before {
+.glitch-active::before {
     content: attr(data-text);
     position: absolute;
     top: 0;
@@ -354,14 +353,13 @@ h4, h3 {
     height: 100%;
     mix-blend-mode: difference;
     animation: glitch 360ms ease-in-out infinite;
-  }
-  input[type="text"],
-  input[type="submit"] {
-      align-items: center; /* Remove default margin */
-  }
-</style>
+}
 
-<style>
+input[type="text"],
+input[type="submit"] {
+    align-items: center; /* Remove default margin */
+}
+
 /* SPONSOR */
 /* Container for the gold sponsor */
 .gold-sponsor-container {
@@ -401,10 +399,18 @@ h4, h3 {
 
 .silver-sponsors-container {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: row; /* Align items horizontally */
+    justify-content: space-around; /* Space items evenly */
     gap: 20px; /* Optional: Adds space between the items */
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .silver-sponsors-container {
+        flex-direction: column; /* Stack items vertically on mobile */
+    }
+}
+
 
 .golden-gradient-text {
     font-size: 2rem;
@@ -414,12 +420,6 @@ h4, h3 {
     background-clip: text;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
-.silver-sponsors-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start; /* Align items at the top */
-    gap: 20px; /* Optional: Adds space between the items */
-}
 
 .sponsor-item {
     display: flex;
@@ -427,7 +427,7 @@ h4, h3 {
     align-items: center;
     flex: 1;
     text-align: center;
-    max-width: 50%;
+    max-width: 100%;
 }
 
 .silver-gradient-text {
@@ -448,6 +448,55 @@ h4, h3 {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .retro-container {
+        padding: 10px;
+    }
+
+    .section-heading {
+        font-size: 1.5rem;
+        text-align: center; /* Center alignment for mobile */
+    }
+
+    p {
+        font-size: 1rem;
+        text-align: center; /* Center alignment for mobile */
+    }
+
+    .inline-container, .rule-point {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .inline-arrow, .inline-triangle {
+        display: none; /* Hide arrow images on mobile */
+    }
+
+    .rule-point {
+        margin-left: 0; /* Remove left margin to center text */
+    }
+
+    .silver-sponsors-container {
+        flex-direction: column;
+    }
+
+    .sponsor-item {
+        max-width: 100%;
+    }
+
+    .gold-sponsor-container img {
+        max-width: 80%;
+    }
+
+    h4, h3 {
+        text-align: center; /* Center alignment for mobile */
+    }
+
+    h4::before, h3::before {
+        text-align: center; /* Center alignment for mobile */
+    }
+}
 
 </style>
 
@@ -767,8 +816,6 @@ Epsilon has offices in France, Canada and Spain.</p>
       </div>
     </div>
   </div>
-
-
 
 
 """
